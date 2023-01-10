@@ -1,8 +1,8 @@
 # AWABOT!
 ## Chinese ver.
 ### 介绍
-一个普通的机器人，如今挂在[DPG](https://github.com/World-Administrator)（\_）的服务器上，在[https://hack.chat/?lounge](https://hack.chat/?lounge)中运行，出现任何BUG了也都可以来这找我。  
-——关注[DPG](https://github.com/World-Administrator)喵，关注[DPG](https://github.com/World-Administrator)谢谢喵~  
+一个普通的机器人，如今挂在[DPG](https://github.com/Doppelganger-phi)（\_）的服务器上，在[https://hack.chat/?lounge](https://hack.chat/?lounge)中运行，出现任何BUG了也都可以来这找我。  
+——关注[DPG](https://github.com/Doppelganger-phi)喵，关注[DPG](https://github.com/Doppelganger-phi)谢谢喵~  
 &emsp;  
 重编写自[HackChat库](https://github.com/gkbrk/hackchat)。  
 
@@ -43,7 +43,7 @@ WTFPL，
 
 ## English ver.
 ### Introduction
-A Normal BOT of hack.chat, runs in https://hack.chat/?lounge on [DPG](https://github.com/World-Administrator)(\_)'s server currently,  
+A Normal BOT of hack.chat, runs in https://hack.chat/?lounge on [DPG](https://github.com/Doppelganger-phi)(\_)'s server currently,  
 Rewriten from [HackChat](https://github.com/gkbrk/hackchat)。
 
 ### Featured

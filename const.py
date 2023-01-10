@@ -1,10 +1,10 @@
-import json, time
+import json, time, random, requests
 import numpy as np
 
 # 莫名其妙的编码问题，很让我头疼啊~
 def dec(cont: str) -> str:
     if cont.startswith(u"\ufeff"):
-        return cont.encode("utf8")[3:].decode("utf8")
+        return cont.encode("utf-8")[3:].decode("utf-8")
     else:
         return cont
 # 返回日期
@@ -13,18 +13,18 @@ def nowDay() -> str:
     return f"{now.tm_year}{now.tm_mon:0>2}{now.tm_mday:0>2}"
 
 # 读取文件们
-FILENAME = "hash.json"
-with open("info.json", encoding="utf8") as f:
+FILENAME = "../files/hash.json"
+with open("../files/info.json", encoding="utf-8") as f:
     info = json.loads(dec(f.read()))
-with open("design.json", encoding="utf8") as f:
+with open("../files/design.json", encoding="utf-8") as f:
     designs = json.loads(dec(f.read()))
-with open(FILENAME, encoding="utf8") as f:
+with open(FILENAME, encoding="utf-8") as f:
     data = json.loads(dec(f.read()))
-with open("userData.json", encoding="utf8") as f:
+with open("../files/userData.json", encoding="utf-8") as f:
     userData = json.loads(dec(f.read()))
-with open("reply.json", encoding="utf8") as f:
+with open("../files/reply.json", encoding="utf-8") as f:
     replys = json.loads(dec(f.read()))
-with open("answer.json", encoding="utf8") as f:
+with open("../files/answer.json", encoding="utf-8") as f:
     answer = json.loads(dec(f.read()))
 
 #命令前缀
@@ -63,6 +63,10 @@ CARDS = ['3', '4', '5', '6', '7', '8', '9', 'H', 'J', 'Q', 'K', 'A', '2']
 JOKERS = ["小", "大"]
 SORT = dict(zip(CARDS+JOKERS, range(15)))
 PINIT = CARDS*4 + JOKERS
+UNO_SORT = {'红0': 0, '红1': 1, '红2': 2, '红3': 3, '红4': 4, '红5': 5, '红6': 6, '红7': 7, '红8': 8, '红9': 9, '红转向': 10, '红禁': 11, '红+2': 12, '黄0': 13, '黄1': 14, '黄2': 15, '黄3': 16, '黄4': 17, '黄5': 18, '黄6': 19, '黄7': 20, '黄8': 21, '黄9': 22, '黄转向': 23, '黄禁': 24, '黄+2': 25, '蓝0': 26, '蓝1': 27, '蓝2': 28, '蓝3': 29, '蓝4': 30, '蓝5': 31, '蓝6': 32, '蓝7': 33, '蓝8': 34, '蓝9': 35, '蓝转向': 36, '蓝禁': 37, '蓝+2': 38, '绿0': 39, '绿1': 40, ' 绿2': 41, '绿3': 42, '绿4': 43, '绿5': 44, '绿6': 45, '绿7': 46, '绿8': 47, '绿9': 48, '绿转向': 49, '绿禁': 50, '绿+2': 51, '变色': 52, '+4': 53}
+
+languages = ['af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'bg', 'ca', 'ceb', 'ny', 'zh-cn', 'zh-tw', 'co', 'hr', 'cs', 'da', 'nl', 'en', 'eo', 'et', 'tl', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw', 'he', 'hi', 'hmn', 'hu', 'is', 'ig', 'id', 'ga', 'it', 'ja', 'jw', 'kn', 'kk', 'km', 'ko', 'ku', 'ky', 'lo', 'la', 'lv', 'lt', 'lb', 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'or', 'ps', 'fa', 'pl', 'pt', 'pa', 'ro', 'ru', 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tg', 'ta', 'te', 'th', 'tr', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu']
+
 # 自定义回复，包含了主人对我的满满心意，诶嘿嘿~
 RANDLIS = [
     [f"找{owner}去吧。", "早上好！", "干什么?", "想下象棋吗？发送菜单看看？", "好好好~", "有什么吩咐~", "sender寂寞了吧", "发送菜单了解我的功能~", "怎么了？",
@@ -338,7 +342,6 @@ LINE = {
     "我是傻逼": RANDLIS[6],
     "hi": RANDLIS[9],
 
-    "涩图": lambda: colorPic() if sysList[0] else "害，别惦记你那涩涩了。",
     "listwh": lambda: f"当前白名单识别码：{'，'.join(whiteList)}",
     "listbn": lambda: f"当前黑名单昵称：{'，'.join(blackName)}",
     "listbl": lambda: f"当前黑名单hash：{'，'.join(blackList)}",
